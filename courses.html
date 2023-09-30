@@ -40,9 +40,18 @@
       margin-top: 0;
     }
 
-    .subject button {
+    .subject a.button {
+      display: inline-block;
       padding: 10px 20px;
       font-size: 16px;
+      background-color: red;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+
+    .subject a.button:hover {
+      background-color: darkred;
     }
 
     footer {
@@ -108,31 +117,24 @@
     <div class="subject">
       <h2>Mathematics</h2>
       <p>Study various topics in mathematics, including algebra, calculus, geometry, and more.</p>
-      <button onclick="enroll('Mathematics')">Enroll</button>
+      <a href="/maths" class="button">Enroll</a>
     </div>
 
     <div class="subject">
       <h2>Science</h2>
       <p>Explore the fascinating world of science, covering physics, chemistry, biology, and more.</p>
-      <button onclick="enroll('Science')">Enroll</button>
+      <a href="/science" class="button">Enroll</a>
     </div>
 
     <div class="subject">
       <h2>History</h2>
       <p>Dive into the past with historical subjects, understanding events, cultures, and civilizations.</p>
-      <button onclick="enroll('History')">Enroll</button>
+      <a href="/history" class="button">Enroll</a>
     </div>
   </main>
 
   <footer>
     &copy; 2023 Your Website Name
   </footer>
-
-  <script>
-    function enroll(subject) {
-      alert('Enrolled in ' + subject);
-      // Add additional logic for subject enrollment
-    }
-  </script>
 </body>
 </html>
