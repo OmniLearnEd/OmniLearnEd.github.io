@@ -85,14 +85,51 @@
     </div>
 
     <label for="year-dropdown">Select Level: </label>
-    <select id="year-dropdown" class="year-dropdown">
+    <select id="year-dropdown" class="year-dropdown" onchange="displayTopics()">
+      <option value="none">Select a level</option>
       <option value="gcse">GCSE</option>
       <option value="alevel">A-Level</option>
     </select>
 
     <br><br>
 
+    <div id="topics"></div>
+
     <a href="/courses" class="back-button">Back to Subjects</a>
   </main>
+
+  <script>
+    function displayTopics() {
+      const selectedLevel = document.getElementById('year-dropdown').value;
+      const topicsDiv = document.getElementById('topics');
+      let topicsHTML = '';
+
+      if (selectedLevel === 'gcse') {
+        topicsHTML = `
+          <h2>GCSE Mathematics Topics</h2>
+          <ul>
+            <li>Algebra</li>
+            <li>Geometry</li>
+            <li>Statistics</li>
+            <li>Calculus</li>
+            <!-- Add more GCSE topics as needed -->
+          </ul>
+        `;
+      } else if (selectedLevel === 'alevel') {
+        topicsHTML = `
+          <h2>A-Level Mathematics Topics</h2>
+          <ul>
+            <li>Advanced Algebra</li>
+            <li>Calculus and Analysis</li>
+            <li>Statistics and Mechanics</li>
+            <li>Discrete Mathematics</li>
+            <!-- Add more A-Level topics as needed -->
+          </ul>
+        `;
+      }
+
+      topicsDiv.innerHTML = topicsHTML;
+    }
+  </script>
 </body>
 </html>
