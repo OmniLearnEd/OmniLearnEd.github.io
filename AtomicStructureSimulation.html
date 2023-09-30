@@ -83,7 +83,63 @@
   <button onclick="startSimulation()">Start Simulation</button>
 
   <script>
-    // ... Rest of the JavaScript code remains unchanged ...
+    let canvas;
+    let ctx;
+    let isSimulationRunning = false;
+    let nucleusX;
+    let nucleusY;
+    let electrons = [];
+    const electronRadius = 5;
+    const shellRadii = [50, 90, 130]; // Radii of electron shells
+
+    function startSimulation() {
+      canvas = document.getElementById('simulationCanvas');
+      ctx = canvas.getContext('2d');
+
+      nucleusX = canvas.width / 2;
+      nucleusY = canvas.height / 2;
+
+      // Initialize electrons in different shells
+      electrons = [
+        { angle: 0, speed: 0.05, shell: 0, color: 'blue' },
+        { angle: Math.PI / 4, speed: 0.03, shell: 1, color: 'green' },
+        { angle: Math.PI / 2, speed: 0.02, shell: 2, color: 'red' }
+      ];
+
+      isSimulationRunning = true;
+      animate();
+    }
+
+    function animate() {
+      if (!isSimulationRunning) return;
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Draw the nucleus (a circle)
+      ctx.beginPath();
+      ctx.arc(nucleusX, nucleusY, 10, 0, Math.PI * 2);
+      ctx.fillStyle = 'gray';
+      ctx.fill();
+
+      // Update and draw electrons
+      electrons.forEach(electron => {
+        // Update electron position based on angle and shell radius
+        const shellRadius = shellRadii[electron.shell];
+        const electronX = nucleusX + shellRadius * Math.cos(electron.angle);
+        const electronY = nucleusY + shellRadius * Math.sin(electron.angle);
+
+        // Update angle for the next frame
+        electron.angle += electron.speed;
+
+        // Draw the electron
+        ctx.beginPath();
+        ctx.arc(electronX, electronY, electronRadius, 0, Math.PI * 2);
+        ctx.fillStyle = electron.color;
+        ctx.fill();
+      });
+
+      requestAnimationFrame(animate);
+    }
   </script>
 </body>
 </html>
