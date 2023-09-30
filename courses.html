@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Courses</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    .course {
+      border: 1px solid #ccc;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .course h2 {
+      margin-top: 0;
+    }
+
+    .course button {
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Courses</h1>
+
+  <div class="course">
+    <h2>Course Title 1</h2>
+    <p>Description of course 1. This course covers various topics and provides hands-on experience.</p>
+    <button onclick="enroll('Course Title 1')">Enroll</button>
+  </div>
+
+  <div class="course">
+    <h2>Course Title 2</h2>
+    <p>Description of course 2. Explore advanced concepts and gain valuable skills in this course.</p>
+    <button onclick="enroll('Course Title 2')">Enroll</button>
+  </div>
+
+  <div class="course">
+    <h2>Course Title 3</h2>
+    <p>Description of course 3. Learn industry-relevant content and enhance your expertise.</p>
+    <button onclick="enroll('Course Title 3')">Enroll</button>
+  </div>
+
+  <script>
+    function enroll(courseTitle) {
+      alert('Enrolled in ' + courseTitle);
+      // Add additional logic for course enrollment
+    }
+  </script>
+</body>
+</html>
