@@ -3,54 +3,135 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Courses</title>
+  <title>Subjects</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      margin: 20px;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      color: #333;
     }
 
-    .course {
+    header {
+      background-color: #3498db;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    header img {
+      max-width: 100%;
+      height: auto;
+      margin-top: 20px;
+    }
+
+    main {
+      padding: 20px;
+    }
+
+    .subject {
       border: 1px solid #ccc;
       padding: 20px;
       margin-bottom: 20px;
     }
 
-    .course h2 {
+    .subject h2 {
       margin-top: 0;
     }
 
-    .course button {
+    .subject button {
       padding: 10px 20px;
       font-size: 16px;
+    }
+
+    footer {
+      background-color: #ecf0f1;
+      text-align: center;
+      padding: 20px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+
+    section {
+      margin-bottom: 20px;
+    }
+
+    section h3 {
+      color: #3498db;
+    }
+
+    section ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    section ul li {
+      margin-bottom: 5px;
+    }
+
+    section a {
+      display: inline-block;
+      padding: 10px 20px;
+      margin-right: 10px;
+      background-color: #3498db;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+
+    section a:hover {
+      background-color: #2980b9;
+    }
+
+    blockquote {
+      border-left: 5px solid #3498db;
+      padding-left: 10px;
+      margin-bottom: 10px;
+    }
+
+    blockquote em {
+      display: block;
+      margin-top: 5px;
+      font-style: normal;
+      color: #555;
     }
   </style>
 </head>
 <body>
-  <h1>Courses</h1>
+  <header>
+    <h1>Subjects</h1>
+  </header>
 
-  <div class="course">
-    <h2>Course Title 1</h2>
-    <p>Description of course 1. This course covers various topics and provides hands-on experience.</p>
-    <button onclick="enroll('Course Title 1')">Enroll</button>
-  </div>
+  <main>
+    <div class="subject">
+      <h2>Mathematics</h2>
+      <p>Study various topics in mathematics, including algebra, calculus, geometry, and more.</p>
+      <button onclick="enroll('Mathematics')">Enroll</button>
+    </div>
 
-  <div class="course">
-    <h2>Course Title 2</h2>
-    <p>Description of course 2. Explore advanced concepts and gain valuable skills in this course.</p>
-    <button onclick="enroll('Course Title 2')">Enroll</button>
-  </div>
+    <div class="subject">
+      <h2>Science</h2>
+      <p>Explore the fascinating world of science, covering physics, chemistry, biology, and more.</p>
+      <button onclick="enroll('Science')">Enroll</button>
+    </div>
 
-  <div class="course">
-    <h2>Course Title 3</h2>
-    <p>Description of course 3. Learn industry-relevant content and enhance your expertise.</p>
-    <button onclick="enroll('Course Title 3')">Enroll</button>
-  </div>
+    <div class="subject">
+      <h2>History</h2>
+      <p>Dive into the past with historical subjects, understanding events, cultures, and civilizations.</p>
+      <button onclick="enroll('History')">Enroll</button>
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2023 Your Website Name
+  </footer>
 
   <script>
-    function enroll(courseTitle) {
-      alert('Enrolled in ' + courseTitle);
-      // Add additional logic for course enrollment
+    function enroll(subject) {
+      alert('Enrolled in ' + subject);
+      // Add additional logic for subject enrollment
     }
   </script>
 </body>
