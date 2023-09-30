@@ -64,6 +64,25 @@
       font-size: 16px;
       border-radius: 5px;
     }
+
+    .topic-list {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .topic-list li {
+      margin-bottom: 5px;
+    }
+
+    .topic-list a {
+      text-decoration: none;
+      color: #3498db;
+      cursor: pointer;
+    }
+
+    .topic-list a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
@@ -107,23 +126,23 @@
       if (selectedLevel === 'gcse') {
         topicsHTML = `
           <h2>GCSE Mathematics Topics</h2>
-          <ul>
-            <li>Algebra</li>
-            <li>Geometry</li>
-            <li>Statistics</li>
-            <li>Calculus</li>
-            <!-- Add more GCSE topics as needed -->
+          <ul class="topic-list">
+            <li><a href="/gcse/algebra">Algebra</a></li>
+            <li><a href="/gcse/geometry">Geometry</a></li>
+            <li><a href="/gcse/statistics">Statistics</a></li>
+            <li><a href="/gcse/calculus">Calculus</a></li>
+            <!-- Add more GCSE topics with appropriate URLs -->
           </ul>
         `;
       } else if (selectedLevel === 'alevel') {
         topicsHTML = `
           <h2>A-Level Mathematics Topics</h2>
-          <ul>
-            <li>Advanced Algebra</li>
-            <li>Calculus and Analysis</li>
-            <li>Statistics and Mechanics</li>
-            <li>Discrete Mathematics</li>
-            <!-- Add more A-Level topics as needed -->
+          <ul class="topic-list">
+            <li><a href="/alevel/advanced_algebra">Advanced Algebra</a></li>
+            <li><a href="/alevel/calculus_analysis">Calculus and Analysis</a></li>
+            <li><a href="/alevel/statistics_mechanics">Statistics and Mechanics</a></li>
+            <li><a href="/alevel/discrete_math">Discrete Mathematics</a></li>
+            <!-- Add more A-Level topics with appropriate URLs -->
           </ul>
         `;
       }
