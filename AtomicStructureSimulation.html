@@ -3,125 +3,54 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Atomic Structure Simulation</title>
+  <title>Courses</title>
   <style>
     body {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-top: 50px;
       font-family: Arial, sans-serif;
+      margin: 20px;
     }
 
-    #simulationCanvas {
-      border: 1px solid #000;
-      background-color: #f0f0f0;
+    .subject {
+      border: 1px solid #ccc;
+      padding: 20px;
+      margin-bottom: 20px;
     }
 
-    button {
-      margin-top: 20px;
+    .subject h2 {
+      margin-top: 0;
+    }
+
+    .subject button {
       padding: 10px 20px;
-      font-size: 18px;
-    }
-
-    select {
-      margin-top: 10px;
       font-size: 16px;
     }
   </style>
 </head>
 <body>
-  <select id="elementSelector" onchange="selectElement()">
-    <option value="hydrogen">Hydrogen</option>
-    <option value="helium">Helium</option>
-  </select>
+  <h1>Subjects</h1>
 
-  <canvas id="simulationCanvas" width="400" height="300"></canvas>
+  <div class="subject">
+    <h2>Mathematics</h2>
+    <p>Study various topics in mathematics, including algebra, calculus, geometry, and more.</p>
+    <button onclick="enroll('Mathematics')">Enroll</button>
+  </div>
 
-  <button onclick="startSimulation()">Start Simulation</button>
+  <div class="subject">
+    <h2>Science</h2>
+    <p>Explore the fascinating world of science, covering physics, chemistry, biology, and more.</p>
+    <button onclick="enroll('Science')">Enroll</button>
+  </div>
+
+  <div class="subject">
+    <h2>History</h2>
+    <p>Dive into the past with historical subjects, understanding events, cultures, and civilizations.</p>
+    <button onclick="enroll('History')">Enroll</button>
+  </div>
 
   <script>
-    let canvas;
-    let ctx;
-    let isSimulationRunning = false;
-    let nucleusX;
-    let nucleusY;
-    let electrons = [];
-    const electronRadius = 5;
-    const shellRadii = [50, 90, 130]; // Radii of electron shells
-
-    function startSimulation() {
-      if (isSimulationRunning) return;  // Prevent multiple starts
-
-      canvas = document.getElementById('simulationCanvas');
-      ctx = canvas.getContext('2d');
-
-      nucleusX = canvas.width / 2;
-      nucleusY = canvas.height / 2;
-
-      // Get the selected element (default to hydrogen)
-      const selectedElement = document.getElementById('elementSelector').value;
-      electrons = getAtomicStructure(selectedElement);
-
-      isSimulationRunning = true;
-      animate();
-    }
-
-    function animate() {
-      if (!isSimulationRunning) return;
-
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      // Draw the nucleus (a circle)
-      ctx.beginPath();
-      ctx.arc(nucleusX, nucleusY, 10, 0, Math.PI * 2);
-      ctx.fillStyle = 'gray';
-      ctx.fill();
-
-      // Update and draw electrons
-      electrons.forEach(electron => {
-        // Update electron position based on angle and shell radius
-        const shellRadius = shellRadii[electron.shell];
-        const electronX = nucleusX + shellRadius * Math.cos(electron.angle);
-        const electronY = nucleusY + shellRadius * Math.sin(electron.angle);
-
-        // Update angle for next frame
-        electron.angle += electron.speed;
-
-        // Draw the electron
-        ctx.beginPath();
-        ctx.arc(electronX, electronY, electronRadius, 0, Math.PI * 2);
-        ctx.fillStyle = electron.color;
-        ctx.fill();
-      });
-
-      requestAnimationFrame(animate);
-    }
-
-    function selectElement() {
-      // Stop the simulation when selecting a new element
-      isSimulationRunning = false;
-
-      // Clear the canvas
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      // Get the selected element and update the atomic structure
-      const selectedElement = document.getElementById('elementSelector').value;
-      electrons = getAtomicStructure(selectedElement);
-    }
-
-    function getAtomicStructure(element) {
-      // Define atomic structures for different elements (simplified for demo)
-      const atomicStructures = {
-        hydrogen: [{ angle: 0, speed: 0.05, shell: 0, color: 'blue' }],
-        helium: [
-          { angle: 0, speed: 0.05, shell: 0, color: 'blue' },
-          { angle: Math.PI, speed: 0.05, shell: 0, color: 'blue' }
-        ],
-        // Add more elements and their atomic structures here...
-      };
-
-      return atomicStructures[element] || []; // Return the atomic structure for the selected element
+    function enroll(subject) {
+      alert('Enrolled in ' + subject);
+      // Add additional logic for subject enrollment
     }
   </script>
 </body>
