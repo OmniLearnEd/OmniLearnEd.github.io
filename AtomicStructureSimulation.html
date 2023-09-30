@@ -6,63 +6,16 @@
   <title>Atomic Structure Simulation</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f4f4f4;
-      color: #333;
       display: flex;
       flex-direction: column;
       align-items: center;
       margin-top: 50px;
+      font-family: Arial, sans-serif;
     }
 
-    header {
-      background-color: #3498db;
-      color: white;
-      text-align: center;
-      padding: 20px;
-    }
-
-    header img {
-      max-width: 100%;
-      height: auto;
-      margin-top: 20px;
-    }
-
-    main {
-      padding: 20px;
-    }
-
-    section {
-      margin-bottom: 20px;
-    }
-
-    section h3 {
-      color: #3498db;
-    }
-
-    section ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    section ul li {
-      margin-bottom: 5px;
-    }
-
-    section a {
-      display: inline-block;
-      padding: 10px 20px;
-      margin-right: 10px;
-      background-color: #3498db;
-      color: white;
-      text-decoration: none;
-      border-radius: 5px;
-    }
-
-    section a:hover {
-      background-color: #2980b9;
+    #simulationCanvas {
+      border: 1px solid #000;
+      background-color: #f0f0f0;
     }
 
     button {
@@ -71,43 +24,21 @@
       font-size: 18px;
     }
 
-    #simulationCanvas {
-      border: 1px solid #000;
-      background-color: #f0f0f0;
-    }
-
-    /* New styles for enhancements */
-    .controls {
-      display: flex;
-      justify-content: space-between;
-      width: 400px;
-      margin: 20px auto;
-    }
-
-    .controls button {
+    select {
+      margin-top: 10px;
       font-size: 16px;
-      padding: 8px 16px;
     }
   </style>
 </head>
 <body>
+  <select id="elementSelector" onchange="selectElement()">
+    <option value="hydrogen">Hydrogen</option>
+    <option value="helium">Helium</option>
+  </select>
+
   <canvas id="simulationCanvas" width="400" height="300"></canvas>
 
-  <!-- New elements for enhancements -->
-  <div class="controls">
-    <button onclick="startSimulation()">Start Simulation</button>
-    <button onclick="pauseSimulation()">Pause</button>
-    <button onclick="resetSimulation()">Reset</button>
-  </div>
-
-  <div>
-    <label for="elementSelector">Select Element:</label>
-    <select id="elementSelector" onchange="changeElement(this.value)">
-      <option value="hydrogen">Hydrogen</option>
-      <option value="helium">Helium</option>
-      <!-- Add more elements as needed -->
-    </select>
-  </div>
+  <button onclick="startSimulation()">Start Simulation</button>
 
   <script>
     let canvas;
@@ -120,18 +51,17 @@
     const shellRadii = [50, 90, 130]; // Radii of electron shells
 
     function startSimulation() {
+      if (isSimulationRunning) return;  // Prevent multiple starts
+
       canvas = document.getElementById('simulationCanvas');
       ctx = canvas.getContext('2d');
 
       nucleusX = canvas.width / 2;
       nucleusY = canvas.height / 2;
 
-      // Initialize electrons in different shells
-      electrons = [
-        { angle: 0, speed: 0.05, shell: 0, color: 'blue' },
-        { angle: Math.PI / 4, speed: 0.03, shell: 1, color: 'green' },
-        { angle: Math.PI / 2, speed: 0.02, shell: 2, color: 'red' }
-      ];
+      // Get the selected element (default to hydrogen)
+      const selectedElement = document.getElementById('elementSelector').value;
+      electrons = getAtomicStructure(selectedElement);
 
       isSimulationRunning = true;
       animate();
@@ -155,7 +85,7 @@
         const electronX = nucleusX + shellRadius * Math.cos(electron.angle);
         const electronY = nucleusY + shellRadius * Math.sin(electron.angle);
 
-        // Update angle for the next frame
+        // Update angle for next frame
         electron.angle += electron.speed;
 
         // Draw the electron
@@ -168,21 +98,30 @@
       requestAnimationFrame(animate);
     }
 
-    // New functions for enhancements
-    function pauseSimulation() {
+    function selectElement() {
+      // Stop the simulation when selecting a new element
       isSimulationRunning = false;
-    }
 
-    function resetSimulation() {
-      isSimulationRunning = false;
+      // Clear the canvas
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      // Reset any other simulation-specific variables or settings
+
+      // Get the selected element and update the atomic structure
+      const selectedElement = document.getElementById('elementSelector').value;
+      electrons = getAtomicStructure(selectedElement);
     }
 
-    function changeElement(selectedElement) {
-      // Change simulation parameters based on the selected element
-      // Adjust the number of electrons, shell configurations, etc. accordingly
-      // Update the simulation to reflect the changes
+    function getAtomicStructure(element) {
+      // Define atomic structures for different elements (simplified for demo)
+      const atomicStructures = {
+        hydrogen: [{ angle: 0, speed: 0.05, shell: 0, color: 'blue' }],
+        helium: [
+          { angle: 0, speed: 0.05, shell: 0, color: 'blue' },
+          { angle: Math.PI, speed: 0.05, shell: 0, color: 'blue' }
+        ],
+        // Add more elements and their atomic structures here...
+      };
+
+      return atomicStructures[element] || []; // Return the atomic structure for the selected element
     }
   </script>
 </body>
